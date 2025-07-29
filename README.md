@@ -14,26 +14,20 @@ graph TB
     D --> E[Sidebar Navigation]
     D --> F[Topbar]
     D --> G[Main Content Area]
-
     G --> H[Dashboard Overview]
     G --> I[My Courses]
     G --> J[Resume Tool]
-
     H --> K[Student Stats]
     H --> L[Course Lists]
-
     I --> M[Course Cards]
     I --> N[Filter System]
-
     J --> O[File Upload]
     J --> P[Text Analysis]
     J --> Q[AI Suggestions]
-
     K --> R[Mock API Layer]
     L --> R
     M --> R
     Q --> R
-
     R --> S[studentData.ts]
     S --> T[In-Memory Mock Data]
 ```
@@ -46,17 +40,9 @@ graph TB
 - **Course Completion Statistics**
 - **Active & Completed Course Lists**
 - **Responsive Design**
-- **Student Profile & Progress Tracking**
-- **Course Completion Statistics**
-- **Active & Completed Course Lists**
-- **Responsive Design**
 
 ### 📚 My Courses
 
-- **Smart Course Filtering**
-- **Progress Visualization**
-- **Course Status Indicators**
-- **Instructor Details**
 - **Smart Course Filtering**
 - **Progress Visualization**
 - **Course Status Indicators**
@@ -72,7 +58,7 @@ graph TB
 ### 🛰️ API Simulation
 
 - **All data fetching is performed asynchronously using [Axios](https://axios-http.com/)**
-- **Mock API endpoints are simulated in-memory, but all calls use Axios to mimic real backend requests**
+- **Mock API endpoints are simulated in-memory**
 - **Network latency is simulated for realistic UX**
 
 ## 🛠️ Tech Stack Deep Dive
@@ -82,16 +68,12 @@ graph LR
     A[React 18] --> B[TypeScript]
     B --> C[Vite Build System]
     C --> D[ESLint]
-
     E[Tailwind CSS] --> F[Responsive Design]
     F --> G[Heroicons]
-
     H[React Router] --> I[Navigation]
     I --> J[Client-Side Routing]
-
     K[Mock API Layer] --> L[In-Memory Data]
     L --> M[studentData.ts]
-
     N[Error Boundaries] --> O[Error Handling]
     O --> P[User Experience]
 ```
@@ -102,15 +84,12 @@ graph LR
 - **TypeScript**
 - **React Router v6**
 - **Tailwind CSS**
-- **Axios** (for all API simulation)
+- **Axios**
 
 ### Development Tools
 
 - **Vite**
 - **ESLint**
-- **TypeScript**
-- **Tailwind CSS**
-- **Axios**
 
 ## 🚀 Getting Started
 
@@ -118,43 +97,38 @@ graph LR
 
 - **Node.js** (v16 or higher)
 - **npm** or **yarn**
-- **Node.js** (v16 or higher)
-- **npm** or **yarn**
 
 ### Installation & Setup
 
-1. **Clone the repository** :
-1. **Clone the repository** :
+1. **Clone the repository**:
 
 ```bash
 git clone <repository-url>
 cd student-dashboard
 ```
 
-2. **Install dependencies** :
-3. **Install dependencies** :
+2. **Install dependencies**:
 
 ```bash
 npm install
 ```
 
-3. **Start the development server** :
-4. **Start the development server** :
+3. **Start the development server**:
 
 ```bash
 npm run dev
 ```
 
-4. **Open your browser** and navigate to `http://localhost:5173/student-dashboard/` (or the URL/port shown in your terminal after running the dev server)
+4. **Open your browser** and navigate to http://localhost:5173/student-dashboard/
 
 ### Available Scripts
 
-| Command           | What it does              | Why you care             |
-| ----------------- | ------------------------- | ------------------------ |
-| `npm run dev`     | Starts development server | Hot reloading is life    |
-| `npm run build`   | Builds for production     | Because we ship code     |
-| `npm run preview` | Previews production build | Test before you deploy   |
-| `npm run lint`    | Runs ESLint               | Clean code is happy code |
+| Command         | What it does              | Why you care             |
+| --------------- | ------------------------- | ------------------------ |
+| npm run dev     | Starts development server | Hot reloading is life    |
+| npm run build   | Builds for production     | Because we ship code     |
+| npm run preview | Previews production build | Test before you deploy   |
+| npm run lint    | Runs ESLint               | Clean code is happy code |
 
 ## 📁 Project Structure
 
@@ -167,7 +141,7 @@ src/
 │       ├── components/
 │       │   └── Layout/         # Dashboard layout components
 │       └── pages/              # Dashboard pages
-├── components/                  # Reusable components
+├── components/                 # Reusable components
 └── router.tsx                  # Application routing
 ```
 
@@ -199,13 +173,7 @@ sequenceDiagram
 
 ## 🤖 Mock API & Data Structure
 
-All API calls (student profile, courses, resume analysis) are now simulated using **Axios**. This means:
-
-- Every data fetch in the app uses Axios, just like a real backend.
-- Endpoints are mocked in-memory, but the frontend code is written as if calling a real server.
-- Network latency is simulated for a realistic experience.
-
-### Example (in code):
+### Example
 
 ```ts
 // Fetch all courses
@@ -214,7 +182,7 @@ const courses = await axios.get("/mock/courses");
 
 ### Student Profile Schema
 
-```typescript
+```ts
 interface Student {
   id: string;
   name: string;
@@ -228,7 +196,7 @@ interface Student {
 
 ### Course Data Schema
 
-```typescript
+```ts
 interface Course {
   id: string;
   title: string;
@@ -247,20 +215,15 @@ interface Course {
 
 ## 🚀 Performance Optimizations
 
-- **React.memo()**: Used on key presentational and layout components (`Button`, `Sidebar`, `Topbar`, `DashboardLayout`) to prevent unnecessary re-renders when props do not change.
-- **useCallback()**: Used to memoize event handlers in components like `DashboardLayout`, `Courses`, and `ResumeTool`, ensuring stable function references and further reducing unnecessary renders.
-- **Responsive Design**: Ensures the dashboard looks great and works well on all device sizes, from mobile to desktop.
-- **CSS Transforms**: Used for smooth UI transitions and effects, enhancing user experience without heavy JavaScript.
-- **Error Boundaries**: Catches and gracefully handles JavaScript errors in the UI, preventing the whole app from crashing.
-- **Text Truncation**: Prevents long text from breaking layouts, keeping the interface clean and readable.
+- **React.memo()** to prevent unnecessary re-renders
+- **useCallback()** to memoize event handlers
+- **Responsive Design**
+- **CSS Transforms** for smooth effects
+- **Error Boundaries**
+- **Text Truncation** for clean UI
 
 ## 🎨 Responsive Design Features
 
-- **Mobile-First Approach**
-- **Custom Breakpoints**
-- **Flexible Grid System**
-- **Smooth Animations**
-- **Touch-Friendly**
 - **Mobile-First Approach**
 - **Custom Breakpoints**
 - **Flexible Grid System**
@@ -284,22 +247,16 @@ interface Course {
 
 ## 📄 License
 
-This project is licensed under the MIT License - because open source is the future.
+This project is licensed under the MIT License.
 
 ## 🖼️ Screenshots
 
-<img width="1259" height="671" alt="Screenshot 2025-07-29 at 11 47 47" src="https://github.com/user-attachments/assets/08340d2e-0fea-44b5-9ec4-53a08bf1a966" />
-<img width="1238" height="670" alt="Screenshot 2025-07-29 at 11 48 22" src="https://github.com/user-attachments/assets/58bddf23-d22a-4faf-ba9d-a1a0dc1b1327" />
-<img width="1237" height="670" alt="Screenshot 2025-07-29 at 11 48 44" src="https://github.com/user-attachments/assets/06f32147-8f7b-49b1-a6da-92563baea6fe" />
+![Screenshot 1](https://github.com/user-attachments/assets/08340d2e-0fea-44b5-9ec4-53a08bf1a966)
+![Screenshot 2](https://github.com/user-attachments/assets/58bddf23-d22a-4faf-ba9d-a1a0dc1b1327)
+![Screenshot 3](https://github.com/user-attachments/assets/06f32147-8f7b-49b1-a6da-92563baea6fe)
 
 ---
 
 ## 🚨 Important: Tailwind CSS Version Locked
 
-This project is locked to **Tailwind CSS v3.4.1** for compatibility reasons. Do not upgrade to Tailwind v4+ unless you update the PostCSS configuration and dependencies accordingly.
-
-If you install dependencies, make sure you get v3.4.1:
-
-```
-npm install -D tailwindcss@3.4.1
-```
+This project uses **Tailwind CSS v3.4.1**. Do not upgrade to v4+ unless you update the PostCSS configuration and related dependencies.
