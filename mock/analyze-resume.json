@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "type": "achievement",
+    "title": "Add More Measurable Achievements",
+    "description": "Include specific metrics and quantifiable results in your experience descriptions.",
+    "priority": "high"
+  },
+  {
+    "id": "2",
+    "type": "action-verb",
+    "title": "Use Strong Action Verbs",
+    "description": "Start bullet points with powerful action verbs like \"Developed\", \"Implemented\", \"Led\".",
+    "priority": "high"
+  },
+  {
+    "id": "3",
+    "type": "formatting",
+    "title": "Improve Formatting Consistency",
+    "description": "Ensure consistent spacing, bullet points, and font usage throughout.",
+    "priority": "medium"
+  },
+  {
+    "id": "4",
+    "type": "content",
+    "title": "Add Relevant Skills Section",
+    "description": "Include a dedicated skills section highlighting technical and soft skills.",
+    "priority": "medium"
+  }
+]

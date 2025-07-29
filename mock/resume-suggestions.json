@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "type": "improvement",
+    "title": "Add More Measurable Achievements",
+    "description": "Include concrete numbers and results to better showcase your impact.",
+    "priority": "high"
+  },
+  {
+    "id": "2",
+    "type": "style",
+    "title": "Use Action Verbs",
+    "description": "Start bullet points with verbs like 'Implemented', 'Developed', or 'Led'.",
+    "priority": "medium"
+  },
+  {
+    "id": "3",
+    "type": "formatting",
+    "title": "Keep It Concise",
+    "description": "Limit resume to 1 page if under 5 years experience.",
+    "priority": "low"
+  },
+  {
+    "id": "4",
+    "type": "keyword",
+    "title": "Include Job Keywords",
+    "description": "Match keywords from job descriptions to improve ATS compatibility.",
+    "priority": "medium"
+  }
+]

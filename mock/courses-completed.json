@@ -1,0 +1,16 @@
+[
+  {
+    "id": "2",
+    "title": "Advanced JavaScript",
+    "instructor": "Mike Rodriguez",
+    "progress": 100,
+    "totalLessons": 18,
+    "completedLessons": 18,
+    "category": "Programming",
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&h=200&fit=crop",
+    "description": "Master advanced JavaScript concepts including ES6+ features and async programming.",
+    "startDate": "2025-11-01",
+    "endDate": "2025-01-01",
+    "status": "completed"
+  }
+]
