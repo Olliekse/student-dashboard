@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { studentDataService, ResumeSuggestion } from "../../../api/studentData";
 import {
   DocumentTextIcon,
@@ -15,6 +15,8 @@ const ResumeTool = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [suggestions, setSuggestions] = useState<ResumeSuggestion[]>([]);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+
+  const handleClearResumeText = useCallback(() => setResumeText(""), []);
 
   // File upload handler
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,8 +41,9 @@ const ResumeTool = () => {
     setSuggestions([]);
 
     try {
-      const analysisResults =
-        await studentDataService.analyzeResume(resumeText);
+      const analysisResults = await studentDataService.analyzeResume(
+        resumeText
+      );
       setSuggestions(analysisResults);
     } catch (error) {
       console.error("Error analyzing resume:", error);
@@ -157,7 +160,7 @@ const ResumeTool = () => {
 
             <Button
               variant="secondary"
-              onClick={() => setResumeText("")}
+              onClick={handleClearResumeText}
               disabled={!resumeText.trim()}
             >
               Clear Text
@@ -176,7 +179,9 @@ const ResumeTool = () => {
               {suggestions.map((suggestion) => (
                 <div
                   key={suggestion.id}
-                  className={`p-4 rounded-lg border ${getPriorityColor(suggestion.priority)}`}
+                  className={`p-4 rounded-lg border ${getPriorityColor(
+                    suggestion.priority
+                  )}`}
                 >
                   <div className="flex items-start">
                     {getPriorityIcon(suggestion.priority)}
@@ -193,8 +198,8 @@ const ResumeTool = () => {
                             suggestion.priority === "high"
                               ? "bg-red-100 text-red-800"
                               : suggestion.priority === "medium"
-                                ? "bg-yellow-100 text-yellow-800"
-                                : "bg-green-100 text-green-800"
+                              ? "bg-yellow-100 text-yellow-800"
+                              : "bg-green-100 text-green-800"
                           }`}
                         >
                           {suggestion.priority} priority

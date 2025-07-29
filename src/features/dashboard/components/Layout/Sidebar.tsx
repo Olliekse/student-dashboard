@@ -7,6 +7,8 @@ import {
   CogIcon,
 } from "@heroicons/react/24/outline";
 
+import React from "react";
+
 const Sidebar = () => {
   const location = useLocation();
 
@@ -56,4 +58,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);

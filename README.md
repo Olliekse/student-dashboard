@@ -1,6 +1,8 @@
 # Student Dashboard - Online EdTech Portal 🚀
 
-A modern React-based student dashboard for an online education platform, built with TypeScript, Tailwind CSS, and React Router.
+A modern React-based student dashboard for an online education platform, built with TypeScript, Tailwind CSS, React Router, and **Axios** for API simulation.
+
+Live page: https://olliekse.github.io/student-dashboard/
 
 ## 🧠 Architecture Overview
 
@@ -40,24 +42,30 @@ graph TB
 
 ### 🎓 Dashboard Overview
 
-- **Student Profile & Progress Tracking**: Real-time stats that make you feel like a data scientist
-- **Course Completion Statistics**: Because numbers are cool, right? 📊
-- **Active & Completed Course Lists**: Track your learning journey with beautiful course cards
-- **Responsive Design**: Works on everything from your grandma's iPad to your gaming rig
+- **Student Profile & Progress Tracking**
+- **Course Completion Statistics**
+- **Active & Completed Course Lists**
+- **Responsive Design**
 
 ### 📚 My Courses
 
-- **Smart Course Filtering**: Filter by status (Active, Completed, Upcoming) - because organization is key 🔑
-- **Progress Visualization**: Beautiful progress bars that actually mean something
-- **Course Status Indicators**: Color-coded because we're not savages
-- **Instructor Details**: Know who's teaching you that sweet, sweet knowledge
+- **Smart Course Filtering**
+- **Progress Visualization**
+- **Course Status Indicators**
+- **Instructor Details**
 
 ### ✨ AI Resume Tool
 
-- **PDF Upload Support**: Because who still uses Word docs? 🤷‍♂️
-- **Text Analysis Engine**: Paste your resume and watch the magic happen
-- **Priority-Based Suggestions**: High, medium, low priority - like a real-life task manager
-- **Real-Time Processing**: No waiting around like it's 1999
+- **PDF Upload Support**
+- **Text Analysis Engine**
+- **Priority-Based Suggestions**
+- **Real-Time Processing**
+
+### 🛰️ API Simulation
+
+- **All data fetching is performed asynchronously using [Axios](https://axios-http.com/)**
+- **Mock API endpoints are simulated in-memory, but all calls use Axios to mimic real backend requests**
+- **Network latency is simulated for realistic UX**
 
 ## 🛠️ Tech Stack Deep Dive
 
@@ -82,47 +90,49 @@ graph LR
 
 ### Frontend Architecture
 
-- **React 18**: Because hooks are life, and concurrent features are the future
-- **TypeScript**: Because `any` is not a type, and we're not animals
-- **React Router v6**: For that sweet, sweet client-side routing
-- **Tailwind CSS**: Utility-first CSS that actually makes sense
+- **React 18**
+- **TypeScript**
+- **React Router v6**
+- **Tailwind CSS**
+- **Axios** (for all API simulation)
 
 ### Development Tools
 
-- **Vite**: Lightning-fast builds because waiting is so 2020
-- **ESLint**: Code linting that actually works
-- **TypeScript**: Because runtime errors are for the weak
-- **Tailwind CSS**: Because writing custom CSS is so 2010
+- **Vite**
+- **ESLint**
+- **TypeScript**
+- **Tailwind CSS**
+- **Axios**
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- **Node.js** (v16 or higher) - because we're not living in the past
-- **npm** or **yarn** - package managers that don't suck
+- **Node.js** (v16 or higher)
+- **npm** or **yarn**
 
 ### Installation & Setup
 
-1. **Clone the repository** (because git is awesome):
+1. **Clone the repository** :
 
 ```bash
 git clone <repository-url>
 cd student-dashboard
 ```
 
-2. **Install dependencies** (this might take a minute):
+2. **Install dependencies** :
 
 ```bash
 npm install
 ```
 
-3. **Start the development server** (and watch the magic happen):
+3. **Start the development server** :
 
 ```bash
 npm run dev
 ```
 
-4. **Open your browser** and navigate to `http://localhost:5173` - because localhost is where the magic happens ✨
+4. **Open your browser** and navigate to `http://localhost:5173/student-dashboard/` (or the URL/port shown in your terminal after running the dev server)
 
 ### Available Scripts
 
@@ -174,38 +184,20 @@ sequenceDiagram
     C-->>U: Show Analysis
 ```
 
-## 🎨 Component Architecture
+## 🤖 Mock API & Data Structure
 
-```mermaid
-graph TD
-    A[App.tsx] --> B[Router]
-    B --> C[DashboardLayout]
-    C --> D[Sidebar]
-    C --> E[Topbar]
-    C --> F[Main Content]
+All API calls (student profile, courses, resume analysis) are now simulated using **Axios**. This means:
 
-    F --> G[Dashboard Page]
-    F --> H[Courses Page]
-    F --> I[Resume Tool Page]
+- Every data fetch in the app uses Axios, just like a real backend.
+- Endpoints are mocked in-memory, but the frontend code is written as if calling a real server.
+- Network latency is simulated for a realistic experience.
 
-    G --> J[Stats Cards]
-    G --> K[Course Lists]
+### Example (in code):
 
-    H --> L[Course Cards]
-    H --> M[Filter System]
-
-    I --> N[File Upload]
-    I --> O[Text Input]
-    I --> P[AI Suggestions]
-
-    Q[ErrorBoundary] --> A
-    R[Button Component] --> L
-    R --> N
+```ts
+// Fetch all courses
+const courses = await axios.get("/mock/courses");
 ```
-
-## 🧪 Mock Data Structure
-
-The application uses sophisticated in-memory mock data to simulate a real backend (because we're not backend developers, we're frontend heroes):
 
 ### Student Profile Schema
 
@@ -240,60 +232,37 @@ interface Course {
 }
 ```
 
-## 🤖 AI Resume Analysis Flow
-
-```mermaid
-flowchart TD
-    A[User Input] --> B{Input Type?}
-    B -->|PDF Upload| C[File Processing]
-    B -->|Text Paste| D[Text Processing]
-
-    C --> E[Extract Text]
-    D --> E
-
-    E --> F[AI Analysis Engine]
-    F --> G[Generate Suggestions]
-
-    G --> H[Priority Classification]
-    H --> I[High Priority]
-    H --> J[Medium Priority]
-    H --> K[Low Priority]
-
-    I --> L[Display Results]
-    J --> L
-    K --> L
-```
-
 ## 🚀 Performance Optimizations
 
-- **React.memo()**: Because unnecessary re-renders are the enemy
-- **Responsive Design**: Custom breakpoints for optimal mobile experience
-- **CSS Transforms**: Smooth mobile sidebar animations
-- **Error Boundaries**: Graceful error handling FTW
-- **Text Truncation**: Prevents overflow on smaller screens
+- **React.memo()**: Used on key presentational and layout components (`Button`, `Sidebar`, `Topbar`, `DashboardLayout`) to prevent unnecessary re-renders when props do not change.
+- **useCallback()**: Used to memoize event handlers in components like `DashboardLayout`, `Courses`, and `ResumeTool`, ensuring stable function references and further reducing unnecessary renders.
+- **Responsive Design**: Ensures the dashboard looks great and works well on all device sizes, from mobile to desktop.
+- **CSS Transforms**: Used for smooth UI transitions and effects, enhancing user experience without heavy JavaScript.
+- **Error Boundaries**: Catches and gracefully handles JavaScript errors in the UI, preventing the whole app from crashing.
+- **Text Truncation**: Prevents long text from breaking layouts, keeping the interface clean and readable.
 
 ## 🎨 Responsive Design Features
 
-- **Mobile-First Approach**: Optimized for all screen sizes
-- **Custom Breakpoints**: Handles edge cases (1024px-1107px)
-- **Flexible Grid System**: Adapts from 1 to 4 columns
-- **Smooth Animations**: 300ms transitions for mobile sidebar
-- **Touch-Friendly**: Proper spacing and sizing for mobile
+- **Mobile-First Approach**
+- **Custom Breakpoints**
+- **Flexible Grid System**
+- **Smooth Animations**
+- **Touch-Friendly**
 
 ## 🐛 Debugging Tips
 
-1. **Check the Console**: Because console.log is still the best debugger
-2. **React DevTools**: Install it, love it, live it
-3. **Network Tab**: See what's happening with your API calls
-4. **TypeScript Errors**: Read them, fix them, embrace them
+1. **Check the Console**
+2. **React DevTools**
+3. **Network Tab** (see Axios requests)
+4. **TypeScript Errors**
 
 ## 🤝 Contributing
 
-1. **Fork the repository** (because collaboration is key)
-2. **Create a feature branch** (git flow for the win)
-3. **Make your changes** (and make them awesome)
-4. **Add tests** (because untested code is broken code)
-5. **Submit a pull request** (and hope for the best)
+1. **Fork the repository**
+2. **Create a feature branch**
+3. **Make your changes**
+4. **Add tests**
+5. **Submit a pull request**
 
 ## 📄 License
 
@@ -301,10 +270,18 @@ This project is licensed under the MIT License - because open source is the futu
 
 ## 🖼️ Screenshots
 
-_Screenshots will be added here showing the dashboard interface_
+<img width="1259" height="671" alt="Screenshot 2025-07-29 at 11 47 47" src="https://github.com/user-attachments/assets/08340d2e-0fea-44b5-9ec4-53a08bf1a966" />
+<img width="1238" height="670" alt="Screenshot 2025-07-29 at 11 48 22" src="https://github.com/user-attachments/assets/58bddf23-d22a-4faf-ba9d-a1a0dc1b1327" />
+<img width="1237" height="670" alt="Screenshot 2025-07-29 at 11 48 44" src="https://github.com/user-attachments/assets/06f32147-8f7b-49b1-a6da-92563baea6fe" />
 
 ---
 
-Built with ❤️ and copious amounts of ☕ for the EdTech community
+## 🚨 Important: Tailwind CSS Version Locked
 
-*"In a world full of bugs, be the feature that works."* 🐛✨
+This project is locked to **Tailwind CSS v3.4.1** for compatibility reasons. Do not upgrade to Tailwind v4+ unless you update the PostCSS configuration and dependencies accordingly.
+
+If you install dependencies, make sure you get v3.4.1:
+
+```
+npm install -D tailwindcss@3.4.1
+```

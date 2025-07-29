@@ -1,8 +1,48 @@
+import React, { useEffect, useState } from "react";
 import { BellIcon } from "@heroicons/react/24/outline";
-import { studentDataService } from "../../../../api/studentData";
+import { studentDataService, Student } from "../../../../api/studentData";
 
 const Topbar = () => {
-  const student = studentDataService.getStudent();
+  const [student, setStudent] = useState<Student | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setLoading(true);
+    studentDataService
+      .getStudent()
+      .then((data) => {
+        setStudent(data);
+        setError(null);
+      })
+      .catch(() => setError("Failed to load student profile."))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-between h-16 px-6 bg-white border-b border-gray-200">
+        <div>
+          <h1 className="text-xl font-semibold text-gray-900">
+            Student Dashboard
+          </h1>
+        </div>
+        <div className="text-gray-400 animate-pulse">Loading...</div>
+      </div>
+    );
+  }
+  if (error || !student) {
+    return (
+      <div className="flex items-center justify-between h-16 px-6 bg-white border-b border-gray-200">
+        <div>
+          <h1 className="text-xl font-semibold text-gray-900">
+            Student Dashboard
+          </h1>
+        </div>
+        <div className="text-red-500">{error || "Failed to load profile."}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-between h-16 px-6 bg-white border-b border-gray-200">
@@ -38,4 +78,4 @@ const Topbar = () => {
   );
 };
 
-export default Topbar;
+export default React.memo(Topbar);

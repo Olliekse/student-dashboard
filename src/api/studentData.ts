@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // Types for Student Dashboard
 export interface Course {
   id: string;
@@ -149,60 +151,87 @@ export const mockResumeSuggestions: ResumeSuggestion[] = [
 // Data Service
 class StudentDataService {
   // Get student profile
-  getStudent(): Student {
-    return mockStudent;
+  async getStudent(): Promise<Student> {
+    // Simulate API call with axios and delay
+    return axios.get("/mock/student").then(() => {
+      return new Promise<Student>((resolve) => {
+        setTimeout(() => resolve(mockStudent), 500);
+      });
+    });
   }
 
   // Get all courses
-  getCourses(): Course[] {
-    return mockCourses;
+  async getCourses(): Promise<Course[]> {
+    return axios.get("/mock/courses").then(() => {
+      return new Promise<Course[]>((resolve) => {
+        setTimeout(() => resolve(mockCourses), 500);
+      });
+    });
   }
 
   // Get active courses
-  getActiveCourses(): Course[] {
-    return mockCourses.filter((course) => course.status === "active");
+  async getActiveCourses(): Promise<Course[]> {
+    return axios.get("/mock/courses/active").then(() => {
+      return new Promise<Course[]>((resolve) => {
+        setTimeout(
+          () =>
+            resolve(mockCourses.filter((course) => course.status === "active")),
+          500
+        );
+      });
+    });
   }
 
   // Get completed courses
-  getCompletedCourses(): Course[] {
-    return mockCourses.filter((course) => course.status === "completed");
+  async getCompletedCourses(): Promise<Course[]> {
+    return axios.get("/mock/courses/completed").then(() => {
+      return new Promise<Course[]>((resolve) => {
+        setTimeout(
+          () =>
+            resolve(
+              mockCourses.filter((course) => course.status === "completed")
+            ),
+          500
+        );
+      });
+    });
   }
 
   // Analyze resume and return suggestions
-  analyzeResume(resumeText: string): Promise<ResumeSuggestion[]> {
-    // Simulate API call delay
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // Simple analysis based on content
-        const suggestions = [...mockResumeSuggestions];
+  async analyzeResume(resumeText: string): Promise<ResumeSuggestion[]> {
+    return axios.post("/mock/analyze-resume", { resumeText }).then(() => {
+      return new Promise<ResumeSuggestion[]>((resolve) => {
+        setTimeout(() => {
+          const suggestions = [...mockResumeSuggestions];
 
-        if (
-          !resumeText.toLowerCase().includes("developed") &&
-          !resumeText.toLowerCase().includes("implemented")
-        ) {
-          suggestions.push({
-            id: "5",
-            type: "action-verb",
-            title: "Include More Action Verbs",
-            description:
-              "Your resume could benefit from more dynamic action verbs.",
-            priority: "high",
-          });
-        }
+          if (
+            !resumeText.toLowerCase().includes("developed") &&
+            !resumeText.toLowerCase().includes("implemented")
+          ) {
+            suggestions.push({
+              id: "5",
+              type: "action-verb",
+              title: "Include More Action Verbs",
+              description:
+                "Your resume could benefit from more dynamic action verbs.",
+              priority: "high",
+            });
+          }
 
-        if (!resumeText.includes("%") && !resumeText.includes("increased")) {
-          suggestions.push({
-            id: "6",
-            type: "achievement",
-            title: "Add Quantifiable Results",
-            description:
-              "Include specific percentages and metrics to strengthen your achievements.",
-            priority: "high",
-          });
-        }
+          if (!resumeText.includes("%") && !resumeText.includes("increased")) {
+            suggestions.push({
+              id: "6",
+              type: "achievement",
+              title: "Add Quantifiable Results",
+              description:
+                "Include specific percentages and metrics to strengthen your achievements.",
+              priority: "high",
+            });
+          }
 
-        resolve(suggestions);
-      }, 2000); // 2 second delay to simulate processing
+          resolve(suggestions);
+        }, 2000); // 2 second delay to simulate processing
+      });
     });
   }
 }

@@ -1,4 +1,5 @@
-import { studentDataService } from "../../../api/studentData";
+import { useEffect, useState } from "react";
+import { studentDataService, Course, Student } from "../../../api/studentData";
 import {
   BookOpenIcon,
   CheckCircleIcon,
@@ -7,9 +8,48 @@ import {
 } from "@heroicons/react/24/outline";
 
 const Dashboard = () => {
-  const student = studentDataService.getStudent();
-  const activeCourses = studentDataService.getActiveCourses();
-  const completedCourses = studentDataService.getCompletedCourses();
+  const [student, setStudent] = useState<Student | null>(null);
+  const [activeCourses, setActiveCourses] = useState<Course[]>([]);
+  const [completedCourses, setCompletedCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setLoading(true);
+    Promise.all([
+      studentDataService.getStudent(),
+      studentDataService.getActiveCourses(),
+      studentDataService.getCompletedCourses(),
+    ])
+      .then(([studentData, active, completed]) => {
+        setStudent(studentData);
+        setActiveCourses(active);
+        setCompletedCourses(completed);
+        setError(null);
+      })
+      .catch(() => setError("Failed to load dashboard data."))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="text-center py-12">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+        <h3 className="text-lg font-medium text-gray-900 mb-2">
+          Loading dashboard...
+        </h3>
+      </div>
+    );
+  }
+  if (error || !student) {
+    return (
+      <div className="text-center py-12">
+        <h3 className="text-lg font-medium text-red-600 mb-2">
+          {error || "Failed to load data."}
+        </h3>
+      </div>
+    );
+  }
 
   const stats = [
     {
@@ -32,7 +72,9 @@ const Dashboard = () => {
     },
     {
       name: "Completion",
-      value: `${Math.round((student.completedCourses / student.totalCourses) * 100)}%`,
+      value: `${Math.round(
+        (student.completedCourses / student.totalCourses) * 100
+      )}%`,
       icon: ChartBarIcon,
       color: "bg-purple-500",
     },

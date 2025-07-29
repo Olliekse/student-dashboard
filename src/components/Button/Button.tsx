@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import React from "react";
 
 interface ButtonProps {
   children: ReactNode;
@@ -36,4 +37,4 @@ function Button({
   );
 }
 
-export default Button;
+export default React.memo(Button);

@@ -1,7 +1,8 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useCallback } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
+import React from "react";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -10,6 +11,9 @@ interface DashboardLayoutProps {
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const handleOpenSidebar = useCallback(() => setSidebarOpen(true), []);
+  const handleCloseSidebar = useCallback(() => setSidebarOpen(false), []);
+
   return (
     <div className="h-screen flex overflow-hidden bg-gray-100">
       {/* Mobile sidebar overlay */}
@@ -17,7 +21,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <div className="fixed inset-0 z-40 lg:hidden">
           <div
             className="fixed inset-0 bg-gray-600 bg-opacity-75"
-            onClick={() => setSidebarOpen(false)}
+            onClick={handleCloseSidebar}
           />
         </div>
       )}
@@ -37,7 +41,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <div className="lg:hidden">
           <div className="flex items-center justify-between h-16 px-4 bg-white border-b border-gray-200">
             <button
-              onClick={() => setSidebarOpen(true)}
+              onClick={handleOpenSidebar}
               className="p-2 text-gray-400 hover:text-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 rounded"
             >
               <Bars3Icon className="w-6 h-6" />
@@ -58,4 +62,4 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   );
 };
 
-export default DashboardLayout;
+export default React.memo(DashboardLayout);
