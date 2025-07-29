@@ -58,8 +58,24 @@ graph TB
 ### 🛰️ API Simulation
 
 - **All data fetching is performed asynchronously using [Axios](https://axios-http.com/)**
-- **Mock API endpoints are simulated in-memory**
-- **Network latency is simulated for realistic UX**
+- **API endpoints are simulated using local JSON files and mock data with artificial network latency to mimic real-world API behavior**
+- **Network latency is simulated using timeouts to provide a realistic user experience**
+
+### Mock Data Files
+
+Mock data is stored in JSON files located in the public/mock/ directory:
+
+- student.json
+
+- courses.json
+
+- courses-active.json
+
+- courses-completed.json
+
+- analyze-resume.json
+
+These files are fetched asynchronously to simulate API calls.
 
 ## 🛠️ Tech Stack Deep Dive
 
@@ -121,6 +137,10 @@ npm run dev
 
 4. **Open your browser** and navigate to http://localhost:5173/student-dashboard/
 
+### Deployment Base URL
+
+This project is configured to run from `/student-dashboard/` (e.g., https://olliekse.github.io/student-dashboard/). The `BASE_URL` environment variable is used internally for axios requests to correctly resolve paths for deployed assets and mock JSON files.
+
 ### Available Scripts
 
 | Command         | What it does              | Why you care             |
@@ -143,6 +163,14 @@ src/
 │       └── pages/              # Dashboard pages
 ├── components/                 # Reusable components
 └── router.tsx                  # Application routing
+public/
+└── mock/                      # Mock JSON data files
+    ├── student.json
+    ├── courses.json
+    ├── courses-active.json
+    ├── courses-completed.json
+    └── analyze-resume.json
+
 ```
 
 ## 🔄 Data Flow Architecture
@@ -177,7 +205,7 @@ sequenceDiagram
 
 ```ts
 // Fetch all courses
-const courses = await axios.get("/mock/courses");
+const courses = await axios.get("/mock/courses.json");
 ```
 
 ### Student Profile Schema
