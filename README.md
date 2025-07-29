@@ -46,9 +46,17 @@ graph TB
 - **Course Completion Statistics**
 - **Active & Completed Course Lists**
 - **Responsive Design**
+- **Student Profile & Progress Tracking**
+- **Course Completion Statistics**
+- **Active & Completed Course Lists**
+- **Responsive Design**
 
 ### 📚 My Courses
 
+- **Smart Course Filtering**
+- **Progress Visualization**
+- **Course Status Indicators**
+- **Instructor Details**
 - **Smart Course Filtering**
 - **Progress Visualization**
 - **Course Status Indicators**
@@ -110,9 +118,12 @@ graph LR
 
 - **Node.js** (v16 or higher)
 - **npm** or **yarn**
+- **Node.js** (v16 or higher)
+- **npm** or **yarn**
 
 ### Installation & Setup
 
+1. **Clone the repository** :
 1. **Clone the repository** :
 
 ```bash
@@ -121,12 +132,14 @@ cd student-dashboard
 ```
 
 2. **Install dependencies** :
+3. **Install dependencies** :
 
 ```bash
 npm install
 ```
 
 3. **Start the development server** :
+4. **Start the development server** :
 
 ```bash
 npm run dev
@@ -243,6 +256,11 @@ interface Course {
 
 ## 🎨 Responsive Design Features
 
+- **Mobile-First Approach**
+- **Custom Breakpoints**
+- **Flexible Grid System**
+- **Smooth Animations**
+- **Touch-Friendly**
 - **Mobile-First Approach**
 - **Custom Breakpoints**
 - **Flexible Grid System**
